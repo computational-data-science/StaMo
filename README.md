@@ -1,0 +1,2 @@
+# StaMo
+Statistical Modeling
