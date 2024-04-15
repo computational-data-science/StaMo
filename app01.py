@@ -26,7 +26,7 @@ def calculate_braking_distance(row):
 
 def plot_data(X, y, model=None, lowess_results=None):
     plt.figure(figsize=(10, 6))
-    plt.scatter(X, y, color='skyblue', edgecolors='w', linewidth=0.5, s=50, label='Data points')
+    plt.scatter(X, y, color='skyblue', edgecolors='w', linewidth=0.5, s=50, label='Datenpunkte')
     plt.xlabel('X Werte', fontsize=14)
     plt.ylabel('Y Werte', fontsize=14)
     plt.title('Regressionsanalyse', fontsize=16)
