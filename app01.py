@@ -36,10 +36,10 @@ def plot_data(X, y, model=None, lowess_results=None):
     if model is not None:
         line_X = np.linspace(X.min(), X.max(), 500).reshape(-1, 1)
         line_y = model.predict(line_X)
-        plt.plot(line_X, line_y, color='red', linewidth=2, label='Linear Regression Line')
+        plt.plot(line_X, line_y, color='red', linewidth=2, label='Lineare Regression')
 
     if lowess_results is not None:
-        plt.plot(lowess_results[:, 0], lowess_results[:, 1], color='green', linewidth=2, label='LOWESS Fit')
+        plt.plot(lowess_results[:, 0], lowess_results[:, 1], color='green', linewidth=2, label='"Ideale" Regression')
 
     plt.legend()
     plt.grid(True, linestyle='--', alpha=0.6)
