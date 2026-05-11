@@ -1,0 +1,235 @@
+\documentclass[aspectratio=169, 11pt]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{listings}
+\usepackage{xcolor}
+
+% -------------------------------------------------------
+% Theme: Metropolis (modern, serifenlos, minimal)
+% -------------------------------------------------------
+\usetheme[
+  progressbar=frametitle,
+  block=fill,
+  numbering=fraction,
+]{metropolis}
+
+% Farben -- gedämpfte Palette, kein grelles Blau
+\definecolor{darkslate}{HTML}{0F172A}   % fast schwarz, für Titel + Text
+\definecolor{slategray}{HTML}{475569}   % mittelgrau für Akzente
+\definecolor{lightbg}{HTML}{F8FAFC}     % sehr helles Grau für Hintergrund
+\definecolor{rulecolor}{HTML}{CBD5E1}   % Trennlinien
+\definecolor{hinweisbg}{HTML}{F1F5F9}
+\definecolor{mutedtext}{HTML}{64748B}
+\definecolor{codeblü}{HTML}{3B82F6}
+\definecolor{codegreen}{HTML}{16A34A}
+\definecolor{codecomment}{HTML}{94A3B8}
+
+\setbeamercolor{normal text}{fg=darkslate, bg=white}
+\setbeamercolor{alerted text}{fg=slategray}
+\setbeamercolor{frametitle}{fg=white, bg=darkslate}
+\setbeamercolor{progress bar}{fg=slategray, bg=rulecolor}
+\setbeamercolor{block title}{fg=white, bg=darkslate}
+\setbeamercolor{block body}{fg=darkslate, bg=lightbg}
+\setbeamercolor{title separator}{fg=slategray}
+\setbeamercolor{footline}{fg=mutedtext}
+
+% Titelfolie
+\setbeamercolor{title}{fg=white}
+\setbeamercolor{subtitle}{fg=white!70!darkslate}
+\setbeamercolor{author}{fg=white!70!darkslate}
+\setbeamercolor{institute}{fg=white!70!darkslate}
+\setbeamercolor{date}{fg=white!60!darkslate}
+\setbeamercolor{background canvas}{bg=white}
+
+% Schriftgrössen
+\setbeamerfont{title}{size=\large, series=\bfseries}
+\setbeamerfont{subtitle}{size=\normalsize, series=\mdseries}
+\setbeamerfont{frametitle}{size=\normalsize, series=\bfseries}
+\setbeamerfont{author}{size=\small}
+\setbeamerfont{date}{size=\small}
+\setbeamerfont{block title}{size=\small, series=\bfseries}
+\setbeamerfont{block body}{size=\small}
+
+% Aufzählungszeichen: simpler Strich
+\setbeamertemplate{itemize item}{\small\raise1pt\hbox{--}}
+\setbeamertemplate{itemize subitem}{\scriptsize\raise1pt\hbox{--}}
+
+% -------------------------------------------------------
+% Code-Stil
+% -------------------------------------------------------
+\lstdefinestyle{pyslide}{
+  language=Python,
+  basicstyle=\ttfamily\scriptsize,
+  keywordstyle=\color{codeblü}\bfseries,
+  commentstyle=\color{codecomment}\itshape,
+  stringstyle=\color{codegreen},
+  backgroundcolor=\color{hinweisbg},
+  frame=none, numbers=none,
+  showstringspaces=false, breaklines=trü, tabsize=4,
+  xleftmargin=6pt, xrightmargin=6pt,
+  aboveskip=4pt, belowskip=4pt,
+  literate={ä}{{\"a}}1{ö}{{\"o}}1{ü}{{\"u}}1{ß}{{\ss}}1,
+}
+
+% Hinweiskasten (vor Abgabe entfernen)
+\newcommand{\hinweis}[1]{%
+  \vspace{4pt}%
+  {\scriptsize\color{mutedtext}\textit{#1}}%
+}
+
+% -------------------------------------------------------
+\title{Bottleneck-Analyse im Karosseriebau}
+\subtitle{Eure Fragestellung in einem Satz}
+\author{Vorname Name \quad Vorname Name}
+\institute{Datenanalyse im Produktionsumfeld}
+\date{Sommersemester 2025}
+
+% -------------------------------------------------------
+\begin{document}
+
+\maketitle
+
+% ----------------------------------------------------------------
+\begin{frame}{Fragestellung}
+
+  \begin{block}{Unsere Frage}
+    \textit{[Eine einzige, klar formulierte Frage.]}\\
+    {\small Beispiel: Ist die erhöhte Taktzeit an Station S04 auf einen
+    einzelnen Roboter zurückzuführen -- oder ist sie typabhängig?}
+  \end{block}
+
+  \vspace{8pt}
+  \textbf{Warum relevant für die Produktion:}\\[4pt]
+  \textit{[1--2 Sätze. Welche Entscheidung hängt von der Antwort ab?
+  Konkret: Wartungsplanung, Kapazität, Reihenfolgeplanung?]}
+
+  \vspace{8pt}
+  \hinweis{Diese Folie in 60 Sekunden. Kein Kontext -- direkt zur Frage.}
+
+\end{frame}
+
+% ----------------------------------------------------------------
+\begin{frame}{Daten \& Vorgehen}
+
+  \begin{columns}[T, onlytextwidth]
+    \begin{column}{0.47\textwidth}
+      \textbf{Datenbasis}
+      \begin{itemize}
+        \item \textit{[Anzahl Karosserien, Zeitraum]}
+        \item \textit{[Stationen, Roboter, Typen]}
+        \item Echte Daten vertraulich --\\
+          Analyse auf Beispieldatensatz entwickelt
+      \end{itemize}
+    \end{column}
+
+    \begin{column}{0.47\textwidth}
+      \textbf{Analytischer Weg}
+      \begin{itemize}
+        \item \textit{[Schritt 1: z.\,B. Verteilungsanalyse]}
+        \item \textit{[Schritt 2: z.\,B. Gruppenvergleich]}
+        \item \textit{[Schritt 3: z.\,B. lineares Modell]}
+      \end{itemize}
+
+      \vspace{6pt}
+      \textbf{Warum so?}\\
+      {\small\textit{[1 Satz: was hat euch zu diesem
+      Weg geführt?]}}
+    \end{column}
+  \end{columns}
+
+  \hinweis{Methoden nicht erklären -- zeigen, dass ihr wisst was ihr getan habt.}
+
+\end{frame}
+
+% ----------------------------------------------------------------
+\begin{frame}{Kernergebnis}
+  % Falls zwei aufeinander aufbaünde Befunde: diese Folie duplizieren.
+
+  \begin{columns}[T, onlytextwidth]
+    \begin{column}{0.58\textwidth}
+      % \includegraphics[width=\linewidth]{plots/eür_plot.png}
+      \begin{center}
+        \textcolor{rulecolor}{\rule{\linewidth}{0.4pt}}
+        \vspace{1.2cm}
+        {\small\textcolor{mutedtext}{Grafik einfügen}}
+        \vspace{1.2cm}
+        \textcolor{rulecolor}{\rule{\linewidth}{0.4pt}}
+      \end{center}
+    \end{column}
+
+    \begin{column}{0.38\textwidth}
+      \textbf{Was wir sehen}\\[6pt]
+      {\small\textit{[Kernaussage in 1--2 Sätzen.
+      Konkret: welcher Wert, welcher Unterschied,
+      welche Station oder welcher Roboter?]}}
+
+      \vspace{10pt}
+      \textbf{Wie sicher?}\\[6pt]
+      {\small\textit{[N, Konfidenzintervall, oder:
+      ,,Muster ist konsistent über alle Typen``]}}
+    \end{column}
+  \end{columns}
+
+  \hinweis{Grafik nicht vorlesen -- erklären. Was sieht man, was bedeutet es?}
+
+\end{frame}
+
+% ----------------------------------------------------------------
+\begin{frame}{Implikation für die Produktion}
+
+  \vspace{4pt}
+  \textbf{Was das bedeutet:}\\[8pt]
+  {\normalsize\textit{[Konkreter Satz in Produktionssprache -- nicht
+  ,,die Taktzeit ist höher``, sondern z.\,B.:
+  ,,Solange Roboter R02 nicht gewartet wird, verliert diese Linie
+  pro Schicht X Takteinheiten -- unabhängig davon, wie
+  gut alle anderen Stationen laufen.``]}}
+
+  \vspace{14pt}
+  \textbf{Frage an den Konzern:}\\[6pt]
+  {\small\textit{[Was müsste der Konzern als nächstes prüfen,
+  entscheiden oder bereitstellen?
+  Richtet diese Frage direkt an die Anwesenden.]}}
+
+  \hinweis{Das ist der Kern der Zwischenpräsi.}
+
+\end{frame}
+
+% ----------------------------------------------------------------
+\begin{frame}{Grenzen \& Ausblick}
+
+  \begin{columns}[T, onlytextwidth]
+    \begin{column}{0.47\textwidth}
+      \textbf{Was diese Analyse nicht erfasst}
+      \begin{itemize}
+        \item \textit{[z.\,B. keine Kausalität,\\
+          nur Korrelation]}
+        \item \textit{[z.\,B. Schichteffekte nicht\\
+          prüfbar, Zeitstempel fehlen]}
+        \item \textit{[z.\,B. nur eine Station\\
+          tief analysiert]}
+      \end{itemize}
+    \end{column}
+
+    \begin{column}{0.47\textwidth}
+      \textbf{Nächste sinnvolle Schritte}
+      \begin{itemize}
+        \item \textit{[Was würde die Analyse\\
+          ermöglichen, die jetzt fehlt?]}
+        \item \textit{[Was müsste der Konzern\\
+          dafür bereitstellen?]}
+      \end{itemize}
+    \end{column}
+  \end{columns}
+
+  \vspace{10pt}
+  \hinweis{Grenzen zu kennen ist keine Schwäche --
+  es zeigt, dass ihr den Scope eurer Arbeit verstanden habt.}
+
+\end{frame}
+
+\end{document}

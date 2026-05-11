@@ -1,0 +1,131 @@
+\documentclass[aspectratio=169, 11pt]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{xcolor}
+
+\usetheme[progressbar=none, block=fill, numbering=fraction]{metropolis}
+
+\definecolor{darkslate}{HTML}{0F172A}
+\definecolor{slategray}{HTML}{475569}
+\definecolor{lightbg}{HTML}{F8FAFC}
+\definecolor{rulecolor}{HTML}{CBD5E1}
+\definecolor{mutedtext}{HTML}{64748B}
+
+\setbeamercolor{normal text}{fg=darkslate, bg=white}
+\setbeamercolor{alerted text}{fg=slategray}
+\setbeamercolor{frametitle}{fg=white, bg=darkslate}
+\setbeamercolor{block title}{fg=white, bg=darkslate}
+\setbeamercolor{block body}{fg=darkslate, bg=lightbg}
+\setbeamercolor{title separator}{fg=slategray}
+\setbeamercolor{title}{fg=white}
+\setbeamercolor{subtitle}{fg=white!70!darkslate}
+\setbeamercolor{author}{fg=white!70!darkslate}
+\setbeamercolor{date}{fg=white!60!darkslate}
+\setbeamercolor{background canvas}{bg=white}
+
+\setbeamerfont{title}{size=\large, series=\bfseries}
+\setbeamerfont{subtitle}{size=\normalsize, series=\mdseries}
+\setbeamerfont{frametitle}{size=\normalsize, series=\bfseries}
+\setbeamerfont{author}{size=\small}
+\setbeamerfont{block title}{size=\small, series=\bfseries}
+\setbeamerfont{block body}{size=\small}
+
+\setbeamertemplate{itemize item}{\small\raise1pt\hbox{--}}
+\setbeamertemplate{itemize subitem}{\scriptsize\raise1pt\hbox{--}}
+
+\newcommand{\hinweis}[1]{{\scriptsize\color{mutedtext}\textit{#1}}}
+
+% -------------------------------------------------------
+\title{Bottleneck-Analyse im Karosseriebau}
+\subtitle{Zwischenstand}
+\author{Vorname Name \quad Vorname Name}
+\institute{Datenanalyse im Produktionsumfeld}
+\date{Sommersemester 2025}
+
+% -------------------------------------------------------
+\begin{document}
+
+\maketitle
+
+% ----------------------------------------------------------------
+\begin{frame}{Was haben wir untersucht -- und was haben wir gefunden?}
+
+  \begin{columns}[T, onlytextwidth]
+    \begin{column}{0.55\textwidth}
+
+      % \includegraphics[width=\linewidth]{plots/eür_plot.png}
+      \begin{center}
+        \textcolor{rulecolor}{\rule{\linewidth}{0.4pt}}
+        \vspace{1.5cm}
+        {\small\textcolor{mutedtext}{Grafik einfügen}}
+        \vspace{1.5cm}
+        \textcolor{rulecolor}{\rule{\linewidth}{0.4pt}}
+      \end{center}
+
+    \end{column}
+
+    \begin{column}{0.41\textwidth}
+
+      \textbf{Unsere Frage}\\[4pt]
+      {\small\textit{[Eine Frage in einem Satz]}}
+
+      \vspace{10pt}
+      \textbf{Kernergebnis}\\[4pt]
+      {\small\textit{[Was zeigt der Plot? Konkret:
+      welche Station, welcher Effekt, welche Grössenordnung?]}}
+
+      \vspace{10pt}
+      \textbf{Vorgehen}\\[4pt]
+      {\small\textit{[2--3 Sätze: Welche Daten,
+      welche Methode, warum so?]}}
+
+    \end{column}
+  \end{columns}
+
+  \hinweis{Eine Grafik, eine Aussage. Nicht mehr.}
+
+\end{frame}
+
+% ----------------------------------------------------------------
+\begin{frame}{Welche Fragen haben wir jetzt?}
+
+  \begin{columns}[T, onlytextwidth]
+    \begin{column}{0.47\textwidth}
+
+      \textbf{Fragen, die wir selbst beantworten können}\\[6pt]
+      \begin{itemize}
+        \item \textit{[Folgefrage, die mit den vorhandenen Daten\\
+          beantwortbar ist -- nächster Analyseschritt]}
+        \item \textit{[Weitere Folgefrage]}
+      \end{itemize}
+
+    \end{column}
+
+    \begin{column}{0.47\textwidth}
+
+      \textbf{Fragen, für die wir euch brauchen}\\[6pt]
+      \begin{itemize}
+        \item \textit{[Was fehlt uns an Kontext oder Daten?
+          Z.\,B.: ,,Was passiert konkret an Station X?``]}
+        \item \textit{[Weitere Frage an den Konzern]}
+      \end{itemize}
+
+    \end{column}
+  \end{columns}
+
+  \vspace{14pt}
+
+  \begin{block}{Unser nächster Schritt}
+    \textit{[Was analysiert ihr als nächstes? Ein konkreter Satz.]}
+  \end{block}
+
+  \hinweis{Die rechte Spalte ist genauso wichtig wie die linke.
+  Zeigt, dass ihr wisst was ihr noch nicht wisst.}
+
+\end{frame}
+
+\end{document}
