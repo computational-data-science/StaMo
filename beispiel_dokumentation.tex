@@ -1,0 +1,435 @@
+\documentclass[a4paper, 11pt]{article}
+
+% ================================================================
+% Pakete
+% ================================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage[top=2.5cm, bottom=2.5cm, left=2.8cm, right=2.8cm]{geometry}
+
+\usepackage{xcolor}
+\usepackage{parskip}
+\usepackage{titlesec}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+\usepackage{hyperref}
+
+\tcbuselibrary{skins, breakable}
+
+% ================================================================
+% Farben
+% ================================================================
+\definecolor{accent}{HTML}{1D4ED8}
+\definecolor{mutedtext}{HTML}{6B7280}
+\definecolor{darktext}{HTML}{111827}
+\definecolor{boxbg}{HTML}{EFF6FF}
+\definecolor{boxborder}{HTML}{BFDBFE}
+\definecolor{warnbg}{HTML}{FEF2F2}
+\definecolor{warnborder}{HTML}{FECACA}
+
+% ================================================================
+% Hyperlinks
+% ================================================================
+\hypersetup{
+  colorlinks=true,
+  linkcolor=gray!60!black,
+  urlcolor=gray!60!black,
+  citecolor=gray!60!black
+}
+
+% ================================================================
+% Typografie
+% ================================================================
+\titleformat{\section}{\large\bfseries\color{darktext}}{}{0em}{}[\vspace{-4pt}\rule{\linewidth}{0.4pt}]
+\titleformat{\subsection}{\normalsize\bfseries\color{darktext}}{}{0em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries\color{accent}}{}{0em}{}
+
+\titlespacing{\section}{0pt}{16pt}{6pt}
+\titlespacing{\subsection}{0pt}{10pt}{3pt}
+\titlespacing{\subsubsection}{0pt}{8pt}{2pt}
+
+\setlist[itemize]{itemsep=2pt, topsep=4pt, leftmargin=1.4em}
+\setlist[enumerate]{itemsep=3pt, topsep=4pt, leftmargin=1.5em}
+\renewcommand{\arraystretch}{1.25}
+
+% ================================================================
+% Boxen
+% ================================================================
+\newenvironment{infobox}[1]{%
+  \begin{tcolorbox}[
+    enhanced,
+    breakable,
+    colback=boxbg,
+    colframe=boxborder,
+    boxrule=0.4pt,
+    arc=3pt,
+    left=8pt,
+    right=8pt,
+    top=5pt,
+    bottom=5pt,
+    title={\small\bfseries\color{accent} #1},
+    fonttitle=\small\bfseries,
+    attach boxed title to top left={yshift=-2mm, xshift=4mm},
+    boxed title style={colback=boxbg, colframe=boxborder, boxrule=0.4pt}
+  ]
+}{\end{tcolorbox}}
+
+\newenvironment{warnbox}{%
+  \begin{tcolorbox}[
+    enhanced,
+    breakable,
+    colback=warnbg,
+    colframe=warnborder,
+    boxrule=0.4pt,
+    arc=3pt,
+    left=8pt,
+    right=8pt,
+    top=5pt,
+    bottom=5pt
+  ]
+}{\end{tcolorbox}}
+
+% ================================================================
+% Dokument
+% ================================================================
+\begin{document}
+
+\begin{center}
+  \vspace*{0.8cm}
+  {\LARGE\bfseries Bottleneck-Analyse im Karosseriebau}\\[10pt]
+  {\large Beispiel: Interne Prozess- und Reflexionsdokumentation}\\[6pt]
+  {\normalsize\color{mutedtext} Fiktives Beispiel zur Orientierung, keine Musterlösung}\\[22pt]
+
+  \begin{tabular}{rl}
+    \textbf{Team:} & Anna Muster (ID 123456789) \quad\textbar\quad Ben Beispiel (ID 987654321) \\[4pt]
+    \textbf{Kurs:} & Statistical Modeling Lab (Sommersemester 2025) \\[4pt]
+    \textbf{Abgabe:} & X. Juli 2025 \\
+  \end{tabular}
+\end{center}
+
+\vspace{0.8cm}
+
+\begin{warnbox}
+\textbf{Hinweis zum Beispiel:} Diese Beispiel-Dokumentation verwendet fiktive Stationsnamen, fiktive Kennzahlen und einen vereinfachten Analysekontext.
+Sie zeigt, wie eine interne Reflexion formuliert sein kann, und ersetzt nicht die eigene Auswertung.
+\end{warnbox}
+
+\vspace{0.3cm}
+
+\begin{abstract}
+\noindent
+Diese interne Dokumentation beschreibt unseren Arbeitsprozess im Projekt \textit{Bottleneck-Analyse im Karosseriebau}.
+Untersucht haben wir, ob die Station \texttt{S03\_Dachrahmen} im Beispieldatensatz einen systematischen Engpass darstellt und ob der Effekt von bestimmten Karosserietypen oder einzelnen Robotern abhängt. Im Mittelpunkt stehen die Entstehung der Fragestellung, zentrale Analyseentscheidungen, der Umgang mit KI-Tools, die Plausibilisierung der Ergebnisse, Datenschutzentscheidungen und die Zusammenarbeit im Team. Die Präsentationsfolien selbst sind nicht Gegenstand dieser Dokumentation.
+\end{abstract}
+
+%\tableofcontents
+%\newpage
+
+% ================================================================
+\section{Kurzüberblick über die Analyse}
+% ================================================================
+
+\subsection{Zentrale Fragestellung}
+
+Unsere zentrale analytische Fragestellung lautete:
+
+\begin{center}
+\fbox{%
+\begin{minipage}{0.9\linewidth}
+\centering
+\textbf{Ist die Station \texttt{S03\_Dachrahmen} ein systematischer Taktzeit-Engpass, und wird dieser Effekt durch bestimmte Karosserietypen oder einzelne Roboter verstärkt?}
+\end{minipage}}
+\end{center}
+
+Wir haben diese Frage gewählt, weil \texttt{S03\_Dachrahmen} in der ersten Exploration sowohl beim Median als auch beim 95.\ Perzentil der Stationszeit auffiel. Die Auffälligkeit ließ sich also nicht allein auf einzelne Extremwerte zurückführen. Offen blieb nach der ersten Analyse, ob die Station insgesamt langsamer ist oder ob der Effekt vor allem durch bestimmte Karosserietypen beziehungsweise einzelne Roboter entsteht.
+
+\subsection{Kernaussage der Analyse}
+
+Das wichtigste Ergebnis unserer Analyse:
+
+\begin{center}
+\fbox{%
+\begin{minipage}{0.9\linewidth}
+\centering
+\textbf{Die auffällige Stationszeit an \texttt{S03\_Dachrahmen} scheint im Beispieldatensatz besonders durch SUV-Karosserien und den Roboter \texttt{S03\_R02} verstärkt zu werden.}
+\end{minipage}}
+\end{center}
+
+Drei Befunde stützen diese Aussage: Der Median der Stationszeit lag bei \texttt{S03\_Dachrahmen} deutlich über dem der anderen Stationen, SUV-Karosserien brauchten an dieser Station länger als Limousinen und Kombis, und innerhalb der Station war der Roboter \texttt{S03\_R02} im Vergleich zu den anderen Robotern auffällig langsam.
+
+Die Formulierung ist bewusst vorsichtig gewählt. Die Analyse zeigt eine auffällige Kombination aus Station, Karosserietyp und Roboter, beweist aber keine technische Ursache. Dafür wären zusätzliche Informationen zum realen Prozess, zu Wartungsereignissen und zu möglichen Störungen nötig.
+
+\subsection{Verdichtung für die finale Präsentation}
+
+In der Arbeitsphase entstanden mehrere Auswertungen, unter anderem ein allgemeiner Stationsvergleich, ein Typvergleich, ein Robotervergleich und erste Modellierungsversuche. Für die Präsentation haben wir daraus eine Argumentationslinie gemacht:
+
+\begin{center}
+\textbf{auffällige Station} $\rightarrow$ \textbf{Typunterschiede} $\rightarrow$ \textbf{auffälliger Roboter} $\rightarrow$ \textbf{offene Prozessfrage}
+\end{center}
+
+Aufgenommen wurde nur, was diese Argumentation direkt stützt. Alternative Plotvarianten und ein erster Modellierungsansatz blieben bewusst draußen; sie hätten die Präsentation verlängert, ohne die Kernaussage zu verbessern.
+
+Die wichtigste Entscheidung für die Präsentation war, die Analyse nicht als fertige Ursachenanalyse darzustellen, sondern als datenbasierte Auffälligkeit. Auf der Folie \glqq Grenzen \& Ausblick\grqq{} steht deshalb, welche Informationen für eine belastbare Einordnung fehlen: eine Prozessbeschreibung der Station, Wartungs- oder Störungsdaten sowie Kontext zum betrachteten Zeitraum.
+
+% ================================================================
+\section{Entstehung der Fragestellung}
+% ================================================================
+
+\subsection{Erste Exploration}
+
+Zu Beginn haben wir die Stationszeiten über alle Stationen hinweg verglichen. Der Ansatz war bewusst breit, weil wir zunächst nur prüfen wollten, ob es überhaupt auffällige Stationen gibt. Dafür haben wir Median, Mittelwert, Standardabweichung und 95.\ Perzentil je Station berechnet und zusätzlich Boxplots erstellt.
+
+\texttt{S03\_Dachrahmen} lag beim Mittelwert, beim Median und beim 95.\ Perzentil weit oben. Die Station war damit auch im typischen Fall langsamer als die anderen, nicht erst bei einzelnen Ausreißern. Diese Beobachtung hat die weitere Analyse stark geprägt.
+
+\subsection{Verworfene oder angepasste Fragestellungen}
+
+Unsere erste Fragestellung lautete:
+
+\begin{quote}
+\textit{Welche Faktoren beeinflussen die Taktzeit in der gesamten Linie?}
+\end{quote}
+
+Wir haben sie verworfen, weil sie zu breit war. Mit den vorhandenen Daten hätten wir viele mögliche Einflussfaktoren gleichzeitig betrachten müssen, ohne genug Prozesswissen für eine belastbare Interpretation zu haben. Außerdem hätte sich daraus kaum eine klare zentrale Grafik für den Konzerntermin ableiten lassen.
+
+Eine zweite Idee war, ausschließlich den Karosserietyp zu betrachten. Das war konkreter, hätte aber Unterschiede zwischen Stationen und Robotern verdeckt. Erst die Kombination aus Stationsfokus, Typvergleich und Roboteranalyse ergab eine sinnvolle Eingrenzung.
+
+\subsection{Endgültige Eingrenzung}
+
+Die endgültige Fragestellung konzentrierte sich auf eine auffällige Station und prüfte dort zwei mögliche Erklärungsrichtungen: Karosserietyp und Roboter. Diese Eingrenzung war mit den vorhandenen Daten bearbeitbar und erzeugte zugleich konkrete Folgefragen an den Konzern.
+
+Entscheidend war, nicht die gesamte Linie modellieren zu wollen, sondern ein klares Muster an einer Stelle vertieft zu untersuchen. Das machte die Analyse auch in den Folien verständlicher.
+
+% ================================================================
+\section{Arbeitsprozess und Analyseentscheidungen}
+% ================================================================
+
+\subsection{Analyseprozess}
+
+Unser Analyseprozess bestand aus vier Schritten.
+
+Zuerst haben wir alle Stationen explorativ verglichen, ohne eine Station vorab zu priorisieren. Betrachtet haben wir dabei sowohl Lagekennzahlen als auch Streuungsmaße.
+
+Danach haben wir \texttt{S03\_Dachrahmen} fokussiert und geprüft, ob die hohen Stationszeiten alle Karosserietypen gleich betreffen oder ob bestimmte Typen systematisch länger brauchen.
+
+Im dritten Schritt haben wir die Roboter innerhalb der Station verglichen, um herauszufinden, ob die Station als Ganzes auffällig ist oder ein einzelner Teilprozess die Stationszeit besonders beeinflusst.
+
+Zum Schluss haben wir die Ergebnisse für die Präsentation verdichtet, entlang der vorgegebenen Struktur: Fragestellung, Daten und Vorgehen, Kernergebnis, Implikation für die Produktion sowie Grenzen und Ausblick.
+
+\subsection{Zentrale methodische Entscheidungen}
+
+\begin{table}[htbp]
+\centering
+\caption{Zentrale Analyseentscheidungen im Beispielprojekt}
+\begin{tabular}{p{3.6cm}p{5.2cm}p{5.2cm}}
+\hline
+\textbf{Entscheidung} & \textbf{Begründung} & \textbf{Verworfene Alternative} \\
+\hline
+\textbf{Median und P95 statt nur Mittelwert} & Taktzeitdaten enthalten Ausreißer nach oben. Der Median beschreibt den typischen Fall robuster, das 95.\ Perzentil zeigt ungünstige Fälle. & Nur Mittelwert je Station; das hätte Ausreißer und typische Situation vermischt. \\
+\hline
+\textbf{Boxplot für Stationsvergleich} & Boxplots zeigen Median, Streuung und Ausreißer in einer Darstellung. & Einfaches Balkendiagramm der Mittelwerte; zu wenig Information über Verteilungen. \\
+\hline
+\textbf{Fokus auf eine Station} & Eine vertiefte Analyse war aussagekräftiger als ein oberflächlicher Vergleich aller Stationen. & Alle Stationen gleich tief analysieren; zu unübersichtlich für zwei Folien. \\
+\hline
+\textbf{Robotervergleich innerhalb der Station} & Damit ließ sich prüfen, ob ein einzelner Teilprozess auffällig ist. & Nur aggregierte Stationszeiten betrachten; interne Ursachen wären verborgen geblieben. \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Beispiel für eine wichtige Analyseentscheidung}
+
+Besonders wichtig war die Entscheidung, für den Stationsvergleich nicht nur Mittelwerte zu verwenden. In einem ersten Plot sah \texttt{S03\_Dachrahmen} zwar auch im Mittelwert auffällig aus, aber wir konnten nicht erkennen, ob wenige extreme Ausreißer oder dauerhaft höhere Zeiten dahintersteckten. Deshalb haben wir Boxplots und das 95.\ Perzentil ergänzt.
+
+Der Befund wurde dadurch stabiler: Die Station war auch im Median auffällig, nicht erst durch Extremwerte. Im Konzerntermin konnten wir damit vorsichtig sagen, dass das Problem vermutlich nicht allein an Ausreißern liegt.
+
+% ================================================================
+\section{Nutzung von KI-Tools}
+% ================================================================
+
+\subsection{Rolle von KI im Projekt}
+
+Wir haben KI-Tools regelmäßig als Arbeitsunterstützung genutzt, vor allem für Python-Code, Debugging, alternative Visualisierungsideen und die sprachliche Verdichtung der Präsentation. KI war dabei kein fachlicher Maßstab, sondern ein Hilfsmittel, um schneller Varianten zu entwickeln und Fehler zu finden.
+
+\begin{table}[htbp]
+\centering
+\caption{Einsatzbereiche von KI im Beispielprojekt}
+\begin{tabular}{p{3.4cm}p{11.0cm}}
+\hline
+\textbf{Bereich} & \textbf{Konkrete Nutzung im Projekt} \\
+\hline
+\textbf{Fragestellung} & Vergleich mehrerer möglicher Analysefragen und Eingrenzung auf eine konkrete Station. \\
+\textbf{Code} & Hilfe bei Pandas-Gruppierungen, Quantilberechnung und Sortierung der Stationen nach Median. \\
+\textbf{Methodik} & Erklärung, wann Median und Perzentile sinnvoller sind als Mittelwerte. \\
+\textbf{Visualisierung} & Vorschläge für Boxplots und Heatmaps; Anpassung der Achsenbeschriftungen. \\
+\textbf{Interpretation} & Gegenprüfung, ob Formulierungen zu kausal oder zu stark waren. \\
+\textbf{Präsentation} & Verdichtung der Kernaussage auf einen Satz und Formulierung konkreter Folgefragen. \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Datenschutz bei KI-Nutzung}
+
+Echte Produktionsdaten haben wir nicht in KI-Tools eingegeben. Für Code- und Methodikfragen haben wir entweder allgemein formuliert oder kleine abstrahierte Beispieldaten verwendet; echte Stationsnamen, reale Messwerte und vertrauliche Unternehmensinformationen blieben außen vor.
+
+Typisch war, die Struktur des Problems zu abstrahieren: Statt echter Spaltennamen haben wir zum Beispiel \texttt{station}, \texttt{typ}, \texttt{roboter\_id} und \texttt{taktzeit\_sek} verwendet. So konnten wir Codehilfe bekommen, ohne vertrauliche Informationen offenzulegen.
+
+\subsection{Grenzen der KI-Nutzung}
+
+Bei der technischen Umsetzung war KI hilfreich, bei der fachlichen Interpretation nicht immer. Mehrere Vorschläge waren zu allgemein oder griffen zu schnell zu kausalen Begriffen wie \glqq Ursache\grqq{} oder \glqq beweist\grqq{}. Solche Formulierungen haben wir abgeschwächt, weil unsere Analyse nur Zusammenhänge und Auffälligkeiten zeigen kann.
+
+Mehrfach schlug KI auch komplexere Modellierungsansätze vor, etwa Random Forests oder multiple Regressionen über alle Stationen. Wir haben das nicht übernommen: Für den Konzerntermin wären die Ergebnisse schwer erklärbar gewesen, und unsere Fragestellung ließ sich mit deskriptiven Kennzahlen und Verteilungsvergleichen besser bearbeiten.
+
+% ================================================================
+\section{Prüfung und Plausibilisierung von KI-Ausgaben}
+% ================================================================
+
+\subsection{Allgemeine Prüfstrategie}
+
+KI-Ausgaben haben wir nicht ungeprüft übernommen. Code lief lokal im Notebook und wurde mit einfachen Kontrollrechnungen verglichen. Bei Gruppierungen haben wir einzelne Zwischentabellen ausgegeben, um zu prüfen, ob wirklich nach Station und Typ gruppiert wurde. Bei Grafiken haben wir Achsenbeschriftungen, Einheiten und Reihenfolgen kontrolliert.
+
+Interpretationen haben wir immer mit den tatsächlichen Kennzahlen abgeglichen. Was nicht direkt durch einen Plot oder eine Kennzahl gedeckt war, kam nicht in die Präsentation.
+
+\subsection{Beispiel 1: Übernommener und angepasster KI-Vorschlag}
+
+Für den Stationsvergleich schlug ein KI-Tool vor, den Mittelwert je Station zu berechnen und als Balkendiagramm darzustellen. Der Vorschlag war technisch korrekt, für unsere Fragestellung aber zu knapp.
+
+Wir haben ihn erweitert um Median, Standardabweichung und 95.\ Perzentil und statt des Balkendiagramms einen Boxplot verwendet. Taktzeitdaten können Ausreißer enthalten; ein Balkendiagramm der Mittelwerte hätte nicht gezeigt, ob die Station dauerhaft auffällig ist oder nur einzelne Extremwerte auftreten.
+
+\subsection{Beispiel 2: Verworfener KI-Vorschlag}
+
+Ein weiterer KI-Vorschlag war, ein komplexes Modell zur Vorhersage der Stationszeit über alle Stationen zu bauen, unter anderem ein Random-Forest-Modell. Diesen Vorschlag haben wir verworfen.
+
+Nicht, weil ein solches Modell grundsätzlich falsch wäre, sondern weil es in unserer Situation schwer interpretierbar gewesen wäre. Unser Ziel war, eine klare Auffälligkeit für die finale Präsentation sichtbar zu machen und daraus belastbare Implikationen, Grenzen und Folgefragen abzuleiten. Ein einfacherer Vergleich von Verteilungen, Typen und Robotern passte besser zur Fragestellung und zur Kommunikationssituation.
+
+\subsection{Beispiel 3: Fachliche Eigenentscheidung}
+
+Eine fachliche Eigenentscheidung war die Auswahl der finalen Kernaussage. KI schlug zunächst eine Formulierung vor, die sinngemäß lautete: \glqq Roboter S03\_R02 verursacht den Engpass.\grqq{} Diese Aussage war uns zu stark.
+
+Wir haben sie geändert zu: \glqq Die auffällige Stationszeit scheint durch SUV-Karosserien und den Roboter S03\_R02 verstärkt zu werden.\grqq{} Das ist vorsichtiger und besser durch unsere Analyse gedeckt. Wir können einen Zusammenhang zeigen, aber keine technische Ursache beweisen; dafür bräuchten wir Prozesswissen, Wartungsdaten und Informationen zur konkreten Station.
+
+% ================================================================
+\section{Datenschutz und Umgang mit vertraulichen Daten}
+% ================================================================
+
+\subsection{Konkrete Datenschutzregeln im Projekt}
+
+Da die Daten aus einem realen Unternehmenskontext stammen, haben wir darauf geachtet, vertrauliche Informationen nicht unkontrolliert weiterzugeben. Echte Produktionsdaten wurden weder in KI-Tools eingegeben noch in öffentliche Repositories hochgeladen. Auch in Prompts haben wir keine echten Stationsnamen, Roboterkennungen, Messwerte oder sonstigen Unternehmensinformationen verwendet.
+
+Für technische Fragen an KI-Tools haben wir stattdessen mit abstrahierten Beispieldaten gearbeitet, die zwar die Struktur unseres Analyseproblems nachbildeten, aber keine echten Werte oder vertraulichen Bezeichnungen enthielten. So ließ sich Code für Gruppierungen, Visualisierungen oder Fehlermeldungen entwickeln, ohne echte Produktionsdaten offenzulegen.
+
+Screenshots, Grafiken und Notebook-Ausgaben haben wir vor der Verwendung auf vertrauliche Details geprüft. Das finale Notebook wurde so bereinigt, dass es keine unnötigen Datenexporte, Rohdatenausschnitte oder Zwischenausgaben enthält, die für die Nachvollziehbarkeit der Analyse nicht erforderlich sind.
+
+\subsection{Konkrete Herausforderung}
+
+Eine konkrete Herausforderung war, Hilfe bei einer Pandas-Gruppierung zu bekommen, ohne einen echten Datenausschnitt zu zeigen. Gelöst haben wir das mit einem kleinen synthetischen Beispieldatensatz: Die Struktur entsprach unserem Analyseproblem, Werte und Namen waren frei erfunden.
+
+Das KI-Tool konnte damit den technischen Code vorschlagen, ohne Zugriff auf echte Daten zu haben. Den Code haben wir anschließend lokal auf die echten Daten angewendet und die Gruppierungen geprüft.
+
+\subsection{Rolle des Beispieldatensatzes}
+
+Der Beispieldatensatz diente zwei Zwecken: Code testen, ohne echte Daten offenzulegen, und KI-Unterstützung nutzen, ohne Vertrauliches einzugeben.
+
+Er hatte aber auch Grenzen. Er bildete nur die Struktur der echten Daten nach, nicht deren vollständige Komplexität. Ergebnisse aus dem Beispieldatensatz haben wir deshalb nicht fachlich interpretiert, sondern ausschließlich zur technischen Entwicklung verwendet.
+
+% ================================================================
+\section{Zusammenarbeit im Team}
+% ================================================================
+
+\subsection{Organisation der Zusammenarbeit}
+
+Die ersten Analyseschritte haben wir gemeinsam begonnen: Datensatz laden, wichtige Spalten identifizieren, erste Kennzahlen berechnen. Nachdem klar wurde, dass \texttt{S03\_Dachrahmen} auffällig ist, haben wir die Arbeit aufgeteilt.
+
+Anna übernahm schwerpunktmäßig den Stations- und Typvergleich, Ben den Robotervergleich und die Bereinigung des Notebooks. Die finale Kernaussage und die Folgefragen haben wir gemeinsam formuliert, weil hier Datenanalyse und Produktionsinterpretation zusammenkommen.
+
+\begin{table}[htbp]
+\centering
+\caption{Zusammenarbeit im Team}
+\begin{tabular}{p{4.0cm}p{10.4cm}}
+\hline
+\textbf{Bereich} & \textbf{Beschreibung} \\
+\hline
+\textbf{Gemeinsame Klärung der Fragestellung} & Erste Exploration aller Stationen und Diskussion möglicher Fokusfragen. \\
+\textbf{Aufteilung der Analysearbeit} & Anna: Stations- und Typvergleich. Ben: Robotervergleich und Notebookstruktur. \\
+\textbf{Gemeinsame Entscheidungen} & Auswahl der finalen Grafik, vorsichtige Formulierung der Kernaussage, Folgefragen. \\
+\textbf{Zusammenführung der Ergebnisse} & Gegenseitige Vorstellung der Teilanalysen und gemeinsame Auswahl für die Folien. \\
+\textbf{Umgang mit Problemen} & Bei unterschiedlichen Interpretationen wurden die Aussagen auf konkrete Kennzahlen und Plots zurückgeführt. \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Schwierigkeiten in der Zusammenarbeit}
+
+Anfangs waren wir unterschiedlich stark auf Modellierung fokussiert. Ben wollte zunächst ein Vorhersagemodell bauen, Anna hielt eine deskriptive Analyse für passender. Gelöst haben wir die Diskussion über das Ziel des Konzerntermins: Dort ist eine klare, interpretierbare Analyse wertvoller als ein komplexes Modell, das sich schwer erklären lässt.
+
+Auch die Formulierung der Kernaussage war ein Streitpunkt. Einige erste Formulierungen klangen zu kausal. Wir haben sie bewusst abgeschwächt, damit klar bleibt, dass wir datenbasierte Auffälligkeiten zeigen, aber keine technische Ursache beweisen.
+
+% ================================================================
+\section{Individuelle Beiträge}
+% ================================================================
+
+\subsection*{Anna Muster}
+\addcontentsline{toc}{subsection}{Anna Muster}
+
+Mein Beitrag lag vor allem in der ersten Exploration, im Stationsvergleich und in der Entwicklung der finalen Fragestellung. Ich habe die Stationskennzahlen berechnet und mehrere Darstellungen ausprobiert, unter anderem Balkendiagramme, Boxplots und eine Tabelle mit Median, Mittelwert und 95.\ Perzentil. An der Entscheidung, Median und P95 statt nur des Mittelwerts zu nutzen, war ich maßgeblich beteiligt; einzelne hohe Taktzeiten können den Mittelwert verzerren.
+
+KI habe ich vor allem für Python-Syntax und Plotgestaltung genutzt, etwa für die Sortierung der Boxplots nach Median. Den vorgeschlagenen Code habe ich lokal getestet und angepasst, weil die erste Version die Stationen alphabetisch sortierte und die Auffälligkeit dadurch weniger klar sichtbar war.
+
+Schwergefallen ist mir, aus vielen möglichen Grafiken eine zentrale Darstellung für die Präsentation auszuwählen. Gelernt habe ich dabei, dass eine gute Analyse nicht möglichst viele Ergebnisse zeigt, sondern eine klare Aussage vorbereitet. Fachlich nehme ich mit, dass Datenanalyse im Produktionsumfeld vorsichtig interpretiert werden muss: Ohne Prozesswissen sind Datenmuster noch keine Ursachen.
+
+\subsection*{Ben Beispiel}
+\addcontentsline{toc}{subsection}{Ben Beispiel}
+
+Mein Beitrag lag vor allem im Robotervergleich, in der Notebookstruktur und in der Plausibilisierung der Ergebnisse. Ich habe die Roboterdaten für \texttt{S03\_Dachrahmen} gefiltert und verglichen, ob ein einzelner Roboter auffällig langsam ist. Außerdem habe ich das finale Notebook bereinigt und geprüft, ob es von oben nach unten durchläuft.
+
+Ich hatte zunächst überlegt, ein Modell zur Vorhersage der Stationszeit zu bauen, was auch KI vorgeschlagen hatte. In der Diskussion mit Anna wurde aber klar, dass ein einfacherer Vergleich für unsere Frage und den Konzerntermin besser geeignet ist.
+
+KI habe ich für Debugging und für die Erklärung einer Pandas-Gruppierung genutzt, ohne echte Daten einzugeben; stattdessen habe ich ein kleines Beispiel mit fiktiven Spaltennamen gebaut. Den KI-Vorschlag habe ich danach im echten Notebook getestet und mit Kontrollausgaben geprüft.
+
+Schwergefallen ist mir, die Interpretation nicht zu stark zu formulieren. Zuerst hätte ich geschrieben, dass der Roboter den Engpass verursacht. Nach der Diskussion im Team wurde daraus, dass der Roboter den Effekt im Datensatz verstärkt. Gelernt habe ich, dass saubere Sprache Teil der Analysequalität ist.
+
+% ================================================================
+\section{Fachliche Reflexion}
+% ================================================================
+
+\subsection{Was wir über Datenanalyse im Produktionsumfeld gelernt haben}
+
+Eine zentrale Erkenntnis war, dass Produktionsdaten ohne Prozesswissen nur begrenzt interpretierbar sind. Die Daten zeigen, wo etwas auffällig ist, aber sie erklären nicht automatisch, warum. Gerade deshalb sind konkrete Folgefragen wichtig.
+
+Überrascht hat uns, wie stark sich die Interpretation einer Analyse verändert, wenn man statt eines Mittelwerts die gesamte Verteilung betrachtet. Der Boxplot zeigte deutlicher als die erste Mittelwertgrafik, dass \texttt{S03\_Dachrahmen} insgesamt höhere Stationszeiten aufweist und nicht bloß einzelne Ausreißer.
+
+\subsection{Was wir methodisch gelernt haben}
+
+Methodisch haben wir gelernt, dass robuste Kennzahlen und gut lesbare Visualisierungen oft wichtiger sind als komplexe Modelle. Ein Modell lohnt sich erst, wenn die Fragestellung klar ist und die Ergebnisse erklärbar bleiben. Für unseren Fall passten Median, P95, Boxplots und Gruppierungen besser als ein schwer interpretierbarer Modellansatz.
+
+Auch im Umgang mit KI haben wir dazugelernt. KI half, schneller zu Codevarianten zu kommen; die fachliche Auswahl, Prüfung und Interpretation mussten wir selbst leisten.
+
+\subsection{Was wir beim nächsten Mal anders machen würden}
+
+Beim nächsten ähnlichen Projekt würden wir früher eine sehr konkrete Fragestellung formulieren. Am Anfang haben wir zu lange versucht, viele Aspekte gleichzeitig zu betrachten. Das führte zu vielen Plots, aber noch zu keiner klaren Aussage. Sobald die Frage enger gefasst war, wurde auch die Analyse deutlich besser.
+
+Außerdem würden wir das Arbeitsnotebook früher strukturieren. Die Bereinigung am Ende war notwendig, aber aufwendig. Ein klarer Aufbau von Beginn an hätte die Zusammenarbeit und die Nachvollziehbarkeit verbessert.
+
+% ================================================================
+\section*{Anhang}
+\addcontentsline{toc}{section}{Anhang}
+% ================================================================
+
+\subsection*{A: Verweis auf das Analysenotebook}
+\addcontentsline{toc}{subsection}{A: Verweis auf das Analysenotebook}
+
+Das bereinigte Analysenotebook ist als separate Datei beigefügt:
+
+\begin{center}
+\texttt{team03\_analyse\_notebook.ipynb}
+\end{center}
+
+\subsection*{B: Verweis auf die Präsentationsfolien}
+\addcontentsline{toc}{subsection}{B: Verweis auf die Präsentationsfolien}
+
+Die finale Präsentation für den Konzerntermin ist als separate Datei beigefügt:
+
+\begin{center}
+\texttt{team03\_finale\_praesentation.pdf}
+\end{center}
+
+\end{document}
